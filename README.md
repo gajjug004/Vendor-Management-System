@@ -8,7 +8,7 @@ system will handle vendor profiles, track purchase orders, and calculate vendor 
 metrics.
 
 
-**API DOCUMENTATION:** [Link](https://documenter.getpostman.com/view/34664697/2sA3JGeiPV)
+## API DOCUMENTATION: [Link](https://documenter.getpostman.com/view/34664697/2sA3JGeiPV)
 
 ## How to run this project locally.
 To run this project, you will need to install the required libraries. Follow the steps below to get started:
