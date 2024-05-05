@@ -1,9 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Vendor, PurchaseOrder, HistoricalPerformance
-from .serializers import VendorSerializer, ViewVendorSerializer, AddVendorSerializer, UpdateVendorSerializer, PurchaseOrderSerializer, AddPurchaseOrderSerializer, UpdatePurchaseOrderSerializer, HistoricalPerformanceSerializer
+from .serializers import VendorSerializer, ViewVendorSerializer, AddVendorSerializer, UpdateVendorSerializer, VendorPerformanceSerializer, PurchaseOrderSerializer, AddPurchaseOrderSerializer, UpdatePurchaseOrderSerializer, HistoricalPerformanceSerializer
 from django.utils import timezone
 from django.db.models import Avg, F
 from rest_framework.views import APIView
@@ -15,7 +14,6 @@ from .signals import update_avg_response_time
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.exceptions import PermissionDenied
-import re
 
 class VendorViewSet(viewsets.ModelViewSet):
     queryset = Vendor.objects.all()
@@ -114,8 +112,8 @@ class AcknowledgePurchaseOrderView(APIView):
         update_avg_response_time(vendor)
 
         return Response({'detail': 'Acknowledgment successful.'}, status=status.HTTP_200_OK)
-
-class VendorHistoricalPerformanceView(APIView):
+    
+class VendorPerformanceView(APIView):
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsAuthenticated]
     def get(self, request, vendor_id):
@@ -124,11 +122,5 @@ class VendorHistoricalPerformanceView(APIView):
         except :
             return Response({'detail': 'Vendor not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-        try:
-            performance = HistoricalPerformance.objects.filter(vendor=vendor).latest('date')
-        except HistoricalPerformance.DoesNotExist:
-            return Response({'detail': 'Historical performance metrics not available for this vendor.'}, status=status.HTTP_404_NOT_FOUND)
-        
-
-        serializer = HistoricalPerformanceSerializer(performance)
+        serializer = VendorPerformanceSerializer(vendor)
         return Response(serializer.data)
