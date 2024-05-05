@@ -49,7 +49,6 @@ def update_fulfillment_rate(vendor):
     vendor.save()
     return fulfillment_rate
 
-
 def create_history_performance_metrics(vendor):
     HistoricalPerformance.objects.create(
         vendor=vendor,
@@ -58,13 +57,3 @@ def create_history_performance_metrics(vendor):
         quality_rating_avg=update_quality_rating_avg(vendor),
         fulfillment_rate=update_avg_response_time(vendor)
     )
-
-    # try:
-    #     performance = HistoricalPerformance.objects.filter(vendor=vendor).latest('date')
-    #     performance.average_response_time = total_seconds
-    #     performance.save()
-    # except HistoricalPerformance.DoesNotExist:
-    #     HistoricalPerformance.objects.create(
-    #         vendor=vendor,
-    #         average_response_time=total_seconds
-    #     )
