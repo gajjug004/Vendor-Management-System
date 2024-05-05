@@ -9,7 +9,6 @@ def update_performance_metrics(sender, instance, created, **kwargs):
         vendor = instance.vendor
         if instance.status == "Completed":
             update_on_time_delivery_rate(vendor)
-            update_fulfillment_rate(vendor)
             create_history_performance_metrics(vendor)
 
             if instance.quality_rating is not None:
@@ -17,6 +16,7 @@ def update_performance_metrics(sender, instance, created, **kwargs):
 
         if instance.acknowledgment_date is not None:
             update_avg_response_time(vendor)
+            update_fulfillment_rate(vendor)
 
 def update_avg_response_time(vendor):
     art = PurchaseOrder.objects.filter(vendor=vendor, acknowledgment_date__isnull=False, issue_date__isnull=False).aggregate(avg_response=Avg(F('acknowledgment_date') - F('issue_date')))['avg_response'] or 0
