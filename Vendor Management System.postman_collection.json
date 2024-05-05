@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "07ec47db-8131-44ae-bfb9-e604c6ccecee",
+		"name": "Vendor Management System",
+		"description": "This is a Vendor Management System using Django and Django REST Framework. This  \nsystem will handle vendor profiles, track purchase orders, and calculate vendor performance  \nmetrics.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34664697"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"\",\r\n    \"username\": \"\",\r\n    \"password\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/users/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"users",
+						""
+					]
+				},
+				"description": "This Endpoint is for creating new user."
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/token/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"token",
+						"login",
+						""
+					]
+				},
+				"description": "This Endpoint is for User Login. You will get a Token in response which can be used to Authorize all the below Endpoints."
+			},
+			"response": []
+		},
+		{
+			"name": "User Logout",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/auth/token/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"token",
+						"logout",
+						""
+					]
+				},
+				"description": "This Endpoint is for User Logout."
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor List",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/vendors/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vendors",
+						""
+					]
+				},
+				"description": "This Endpoint is to view the list of all vendors."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vendor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"HIJ Enterprises\",\r\n    \"contact_details\": \"Phone: +7539514680, Email: hij@example.com\",\r\n    \"address\": \"852 Birch Street, Citytown, State, Country\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/vendors/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vendors",
+						""
+					]
+				},
+				"description": "This Endpoint is to create new vendor."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vendor",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"ABC Electronics Hub\",\r\n    \"contact_details\": \"Phone: +1234567890, Email: abc@example.com\",\r\n    \"address\": \"123 Main Street, Cityville, State, Country\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/vendors/0d54e3b8-1d4c-4937-8c44-d84ff5308b8f/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vendors",
+						"0d54e3b8-1d4c-4937-8c44-d84ff5308b8f",
+						""
+					]
+				},
+				"description": "This Endpoint is to update the details of existing vendor.\n\nYou need to pass the `vendor_code` after `vendors/`"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Vendor",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/vendors/0d54e3b8-1d4c-4937-8c44-d84ff5308b8f/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vendors",
+						"0d54e3b8-1d4c-4937-8c44-d84ff5308b8f",
+						""
+					]
+				},
+				"description": "This Endpoint is for deleting the vendor.\n\nYou need to pass the `vendor_code` after `/vendors`"
+			},
+			"response": []
+		},
+		{
+			"name": "Purchase Order List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PO List Group By Vendor",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/?search=80469cef-e008-4135-a460-61c72ce9e519",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "80469cef-e008-4135-a460-61c72ce9e519"
+						}
+					]
+				},
+				"description": "This Endpoint is to filter the Purchase Order List by vendor.\n\nYou need to pass the `search` = `vendor_code` in Query Parameter"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Purchase Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_date\": \"2024-05-07T16:35:00Z\",\r\n    \"delivery_date\": \"2024-05-15T12:00:00Z\",\r\n    \"items\": {\r\n        \"name\": \"Mouse\"\r\n    },\r\n    \"quantity\": 4,\r\n    \"status\": \"Pending\",\r\n    \"quality_rating\": null,\r\n    \"issue_date\": null,\r\n    \"acknowledgment_date\": null,\r\n    \"vendor\": \"80469cef-e008-4135-a460-61c72ce9e519\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Purchase Order",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order_date\": \"2024-05-07T16:35:00Z\",\r\n    \"delivery_date\": \"2024-05-15T12:00:00Z\",\r\n    \"items\": {\r\n        \"name\": \"Mouse\"\r\n    },\r\n    \"quantity\": 4,\r\n    \"status\": \"Completed\",\r\n    \"quality_rating\": 4,\r\n    \"issue_date\": \"2024-05-08T12:00:00Z\",\r\n    \"acknowledgment_date\": \"2024-05-09T12:00:00Z\",\r\n    \"vendor\": \"80469cef-e008-4135-a460-61c72ce9e519\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/6/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						"6",
+						""
+					]
+				},
+				"description": "This Endpoint is for updating the existing Purchase Order.\n\nYou need to pass the `purchase_order_id` after `/purchase_orders`"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Purchase Order",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/6/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						"6",
+						""
+					]
+				},
+				"description": "This Endpoint is for deleting the existing Purchase Order.\n\nYou need to pass the `purchase_order_id` after `/purchase_orders`"
+			},
+			"response": []
+		},
+		{
+			"name": "Vendor Performance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/vendors/0d54e3b8-1d4c-4937-8c44-d84ff5308b8f/performance/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"vendors",
+						"0d54e3b8-1d4c-4937-8c44-d84ff5308b8f",
+						"performance",
+						""
+					]
+				},
+				"description": "This Endpoint is to get the Vendor Performance of the specific Vendor.\n\nYou need to pass the `vendor_code` after `/vendors` followed by `/performance`"
+			},
+			"response": []
+		},
+		{
+			"name": "Purchase Order Acknowledge",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token c2ef84d0b56ae0e8dc3657d56282b6ed68477cad",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/purchase_orders/1/acknowledge/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"purchase_orders",
+						"1",
+						"acknowledge",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

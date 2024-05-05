@@ -31,3 +31,20 @@ pip install -r requirements.txt
 ```
 python manage.py runserver
 ```
+
+## Testing API Endpoints Through POSTMAN
+To test API Endpoints using POSTMAN. Follow the steps below :
+
+1. Open Postman
+
+2. Go to import 
+
+<div align="center">
+  <img src="assets/screenshots/img2.png" alt="img2">
+</div>
+
+3. Select the Vendor Management System.postman_collection.json file
+
+4. Click on import button
+
+Now you are ready to test all the Endpoints.
